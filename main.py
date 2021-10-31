@@ -163,7 +163,7 @@ pkmntest.validatemoves()
 
 #Tests moves
 print(pkmntest.maxhealth)
-pkmntest.usemove(1, pkmntest)
+pkmntest.usemove(0, pkmntest)
 print(pkmntest.maxhealth)
 
 while True:

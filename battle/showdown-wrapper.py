@@ -1,5 +1,5 @@
 import time
-import os, signal
+import select
 from subprocess import Popen, PIPE, STDOUT
 
 CREATE_NO_WINDOW = 0x08000000
@@ -9,14 +9,10 @@ def stdin_write(p, towrite):
     p.stdin.flush()
 
 def stdout_read(p):
-    while True:
-        line = p.stdout.readline()
-        print(line)
-        if (line == b''):
-            break;
+    pass
 
 def simulate_battle():
-    p = Popen(['node', 'pokemon-showdown', 'simulate-battle'], cwd="pokemon-showdown", stdout=PIPE, stdin=PIPE, stderr=PIPE)
+    p = Popen(['node', 'pokemon-showdown', 'simulate-battle'], cwd="pokemon-showdown", stdout=PIPE, stdin=PIPE, stderr=PIPE, creationflags=CREATE_NO_WINDOW)
     stdin_write(p, '>start {"formatid":"gen7ou"}')
     stdin_write(p, '>player p1 {"name":"Alice"}')
     stdin_write(p, '>player p2 {"name":"Bob"}')

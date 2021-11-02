@@ -15,7 +15,7 @@ def stdout_read(p):
             return output
 
 def simulate_battle(team1=None, team2=None):
-    p = Popen(['node', 'pokemon-showdown', 'simulate-battle'], cwd="battle/pokemon-showdown", stdout=PIPE, stdin=PIPE, stderr=PIPE)#, creationflags=CREATE_NO_WINDOW)
+    p = Popen(['node', 'pokemon-showdown', 'simulate-battle'], cwd="battle/pokemon-showdown", stdout=PIPE, stdin=PIPE, stderr=PIPE, creationflags=CREATE_NO_WINDOW)
 
     stdin_write(p, '>start {"formatid":"gen6ag"}')
 

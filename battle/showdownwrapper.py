@@ -15,9 +15,9 @@ def stdout_read(p):
             return output
 
 def simulate_battle(team1=None, team2=None):
-    p = Popen(['node', 'pokemon-showdown', 'simulate-battle'], cwd="pokemon-showdown", stdout=PIPE, stdin=PIPE, stderr=PIPE)#, creationflags=CREATE_NO_WINDOW)
+    p = Popen(['node', 'pokemon-showdown', 'simulate-battle'], cwd="battle/pokemon-showdown", stdout=PIPE, stdin=PIPE, stderr=PIPE)#, creationflags=CREATE_NO_WINDOW)
 
-    stdin_write(p, '>start {"formatid":"gen7ag"}')
+    stdin_write(p, '>start {"formatid":"gen6ag"}')
 
     if team1:
         stdin_write(p, '>player p1 {"name":"Alice","team":"' + team1 + '"}')
@@ -32,6 +32,4 @@ def simulate_battle(team1=None, team2=None):
     print(stdout_read(p))
     print(stdout_read(p))
     p.terminate()
-
-simulate_battle()
 

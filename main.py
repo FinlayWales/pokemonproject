@@ -4,7 +4,7 @@ import sys
 import json
 import math
 from imports.functions import *
-from battle.showdown-wrapper import *
+from battle.showdownwrapper import *
 
 BLUE  = (0, 0, 255)
 RED   = (255, 0, 0)
@@ -19,6 +19,8 @@ thefont = pygame.font.SysFont('Arial', 20)
 DISPLAYSURF = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 DISPLAYSURF.fill(WHITE)
 pygame.display.set_caption("Pokemon ???")
+
+simulate_battle()
 
 FPS = pygame.time.Clock()
 

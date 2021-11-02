@@ -1,5 +1,3 @@
-import time
-import select
 from subprocess import Popen, PIPE, STDOUT
 
 CREATE_NO_WINDOW = 0x08000000
@@ -9,15 +7,31 @@ def stdin_write(p, towrite):
     p.stdin.flush()
 
 def stdout_read(p):
-    pass
+    p.stdout.flush()
+    output = ""
+    while True:
+        output += p.stdout.read(1).decode(errors='ignore')
+        if output.endswith("\n\n"):
+            return output
 
-def simulate_battle():
-    p = Popen(['node', 'pokemon-showdown', 'simulate-battle'], cwd="pokemon-showdown", stdout=PIPE, stdin=PIPE, stderr=PIPE, creationflags=CREATE_NO_WINDOW)
-    stdin_write(p, '>start {"formatid":"gen7ou"}')
-    stdin_write(p, '>player p1 {"name":"Alice"}')
-    stdin_write(p, '>player p2 {"name":"Bob"}')
-    stdout_read(p)
-    p.kill()
+def simulate_battle(team1=None, team2=None):
+    p = Popen(['node', 'pokemon-showdown', 'simulate-battle'], cwd="pokemon-showdown", stdout=PIPE, stdin=PIPE, stderr=PIPE)#, creationflags=CREATE_NO_WINDOW)
+
+    stdin_write(p, '>start {"formatid":"gen7ag"}')
+
+    if team1:
+        stdin_write(p, '>player p1 {"name":"Alice","team":"' + team1 + '"}')
+    else:
+        stdin_write(p, '>player p1 {"name":"Alice"}')
+    if team2:
+        stdin_write(p, '>player p2 {"name":"Bob","team":"' + team2 + '"}')
+    else:
+        stdin_write(p, '>player p2 {"name":"Bob"}')
+    
+    print(stdout_read(p))
+    print(stdout_read(p))
+    print(stdout_read(p))
+    p.terminate()
 
 simulate_battle()
 

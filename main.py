@@ -20,6 +20,7 @@ DISPLAYSURF = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
 DISPLAYSURF.fill(WHITE)
 pygame.display.set_caption("Pokemon ???")
 
+
 simulate_battle()
 
 FPS = pygame.time.Clock()
